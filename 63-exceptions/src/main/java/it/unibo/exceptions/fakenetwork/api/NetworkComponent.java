@@ -1,6 +1,7 @@
 package it.unibo.exceptions.fakenetwork.api;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Interface for (simulated) communication over an unreliable network.

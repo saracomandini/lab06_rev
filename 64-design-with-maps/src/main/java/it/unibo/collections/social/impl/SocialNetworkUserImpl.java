@@ -38,7 +38,7 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      *
      * think of what type of keys and values would best suit the requirements
      */
-
+    private final Map<String, Set<U>> mapUser = new HashMap<>();
     /*
      * [CONSTRUCTORS]
      *
@@ -49,8 +49,8 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      * - lastName
      * - username
      * - age and every other necessary field
-     */
-    /**
+    */
+   /**
      * Builds a user participating in a social network.
      *
      * @param name
@@ -64,13 +64,15 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      *            application
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
-        super(null, null, null, 0);
+        super(name, surname, user, userAge);
     }
 
     /*
      * 2) Define a further constructor where the age defaults to -1
      */
-
+    public SocialNetworkUserImpl(final String name, final String surname, final String user) {
+        super(name, surname, user, -1);
+    }
     /*
      * [METHODS]
      *
@@ -78,7 +80,12 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public boolean addFollowedUser(final String circle, final U user) {
-        return false;
+        Set<U> followers = mapUser.get(circle);
+        if(followers == null) {
+            followers = new HashSet<>();
+            mapUser.put(circle, followers);
+        }
+        return followers.add(user);
     }
 
     /**
@@ -88,11 +95,19 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
      */
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
-        return null;
+        Set<U> group = mapUser.get(groupName);
+        if(group != null) {
+            return new HashSet<>(group);
+        }
+        return new HashSet<>();
     }
 
     @Override
     public List<U> getFollowedUsers() {
-        return null;
+        Set<U> people = new HashSet<>();
+        for(Set<U> set : mapUser.values()) {
+            people.addAll(set);
+        }
+        return new ArrayList<>(people);
     }
 }
