@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,6 +15,14 @@ public final class UseListsAndMaps {
 
     private static final int ELEMS = 100_000;
     private static final int READS = 1000;
+    private static final int START = 1000;
+    private static final int END = 2000;
+    private static final long AFRICA_POPULATION = 1_110_635_000L;
+    private static final long AMERICAS_POPULATION = 972_005_000L;
+    private static final long ANTARCTICA_POPULATION = 0L;
+    private static final long ASIA_POPULATION = 4_298_723_000L;
+    private static final long EUROPE_POPULATION = 742_452_000L;
+    private static final long OCEANIA_POPULATION = 38_304_000L;
 
     private UseListsAndMaps() {
     }
@@ -30,7 +36,7 @@ public final class UseListsAndMaps {
          * from 1000 (included) to 2000 (excluded).
          */
         final ArrayList<Integer> array = new ArrayList<>();
-        for(int i = 1000; i<= 2000; i++) {
+        for(int i = START; i<= END; i++) {
             array.add(i);
         }
         /*
@@ -88,12 +94,12 @@ public final class UseListsAndMaps {
          * Oceania -> 38,304,000
          */
         final Map<String, Long> map = new HashMap<>();
-        map.put("Africa", 1_110_635_000L);
-        map.put("Americas", 972_005_000L);
-        map.put("Antarctica", 0L);
-        map.put("Asia", 4_298_723_000L);
-        map.put("Europe", 742_452_000L);
-        map.put("Oceania", 38_304_000L);
+        map.put("Africa", AFRICA_POPULATION);
+        map.put("Americas", AMERICAS_POPULATION);
+        map.put("Antarctica", ANTARCTICA_POPULATION);
+        map.put("Asia", ASIA_POPULATION);
+        map.put("Europe", EUROPE_POPULATION);
+        map.put("Oceania", OCEANIA_POPULATION);
         /*
          * 8) Compute the population of the world
          */
